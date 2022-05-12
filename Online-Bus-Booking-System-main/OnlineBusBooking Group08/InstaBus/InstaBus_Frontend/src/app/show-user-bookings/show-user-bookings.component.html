@@ -1,0 +1,148 @@
+<div class="container">
+
+    <div align="center" class="m-3">
+        <h1> Booking Details</h1>
+    </div>
+
+    <div class="row mb-6" align="center">
+        <div class="col-6">
+            <button class="btn btn-primary" routerLink="/userHome">Home</button>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary" (click)="logout()">Logout</button>
+        </div>
+    </div><br><br>
+    <div *ngIf="notFound" align="center">
+        <h1>No booking found...</h1>
+    </div>
+
+    <div *ngIf="found">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Bus Number</th>
+                    <th>Amount</th>
+                    <th>Booking Date</th>
+                    <th>Booking Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let booking of bookings" class="table-striped">
+                <tr>
+                    <td scope="row">{{booking.bookingId}}</td>
+                    <td>{{booking.busNumber}}</td>
+                    <td>{{booking.totalCost | currency:'INR'}}</td>
+                    <td>{{booking.bookingDate }}</td>
+                    <td>{{booking.bookingTime}}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="getPassengers(booking)">Passenger Details</button>
+                        &nbsp;
+                        <button class="btn btn-primary" (click)="getBusDetails(booking.busNumber)">Bus Details</button>
+                        &nbsp;
+                        <button class="btn btn-danger" (click)="delete(booking.bookingId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div><br><br>
+
+    <div class="jumbotron" align="center" *ngIf="bus">
+        <div class="row">
+            <div class="col-6">
+                <h4>Bus Number:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.busNumber }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h4>From:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.departureBusstop }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h4>To:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.arrivalBusstop }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h4>Departure date:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.departureDate }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h4>Departure Time:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.departureTime }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h4>Arrival Date:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.arrivalDate }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h4>Arrival Time:</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{ bus.arrivalTime }}</h4>
+            </div>
+        </div>
+
+        <br><br>
+
+    </div>
+
+    <div *ngIf="passengers">
+
+        <h4>Passenger Details</h4>
+
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Passenger ID</th>
+                    <th>Passenger Name</th>
+                    <th>Passenger Age</th>
+                    <th>Passenger Luggage</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let passenger of passengers" class="table-striped">
+                <tr>
+                    <td scope="row">{{passenger.passengerId}}</td>
+                    <td>{{passenger.name}}</td>
+                    <td>{{passenger.age}}</td>
+                    <td>{{passenger.luggage}}</td>
+                    <td><button class="btn btn-primary" (click)="updatePassenger(passenger.passengerId)">Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>

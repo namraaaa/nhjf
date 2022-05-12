@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+  <div class="panel-heading" >
+    <h2>List of Buses</h2>
+  </div><br>
+  <button class="btn btn-primary" routerLink="/adminHome" >Goto Home</button>
+  <div class="panel-body">
+    <table class="table table-striped" *ngIf="bus">
+      <thead>
+        <tr>
+          <th>Bus Number</th>
+          <th>Departure Busstop</th>
+          <th>Arrival Busstop</th>
+          <th>Available Seats</th>
+          <th>Departure Date</th>
+          <th>Arrival Date</th>
+          <th>Arrival Time</th>
+          <th>Departure Time</th>
+          <th>Bus Vendor</th>
+          <th>Ticket Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bus of bus">
+          <td>{{bus.busNumber}}</td>
+          <td>{{bus.departureBusstop}}</td>
+          <td>{{bus.arrivalBusstop}}</td>
+          <td>{{bus.availableSeats}}</td>
+          <td>{{bus.departureDate}}</td>
+          <td>{{bus.arrivalDate}}</td>
+          <td>{{bus.arrivalTime}}</td>
+          <td>{{bus.departureTime}}</td>
+          <td>{{bus.busVendor}}</td>
+          <td>{{bus.cost}}</td>
+          <td><button  class="btn btn-danger" (click)="removeBus(bus.busNumber)" >Delete</button> &nbsp;
+              <button  class="btn btn-info" (click)="updateBus(bus.busNumber)" >Update</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

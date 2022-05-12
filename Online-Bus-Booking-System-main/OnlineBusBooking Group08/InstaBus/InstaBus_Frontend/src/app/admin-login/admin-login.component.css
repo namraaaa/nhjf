@@ -1,0 +1,15 @@
+.jumbotron {
+    padding-top: 0px;
+    padding-bottom: 5px;
+    background-size: cover;
+    height: 560px;
+}
+
+div.transbox {
+    border-radius: 20px;
+    padding: 40px 30px;
+    margin-top: 100px;
+    opacity: 1;
+    box-shadow: -5px -5px 5px #f4f7faa2,
+        5px 5px 5px rgba(246, 248, 250, 0.671);
+}

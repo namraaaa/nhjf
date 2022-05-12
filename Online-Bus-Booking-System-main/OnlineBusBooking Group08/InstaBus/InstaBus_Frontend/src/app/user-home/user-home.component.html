@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="p-3  bg-info text-white">
+    
+    <div *ngIf="user">
+      <h1>Welcome to InstaBus! {{user.userName}}</h1>
+      <small>User Id: {{ user.userId }}</small
+      ><br />
+      
+    </div>
+  </div>
+  <br />
+
+  <div class="mb-2" align="center">
+      <div class="row">
+          <div class="col-3">
+              <button class="btn btn-primary" (click) = "getBookings()">View Bookings</button>
+          </div>
+
+          <div class="col-3">
+            <button class="btn btn-primary" routerLink="/viewUser" >View Details</button>
+          </div>
+
+          <div class="col-3">
+            <button class="btn btn-primary" routerLink="/updateUser">Update Details</button>
+          </div>
+
+          <div class="col-3">
+              <button class="btn btn-primary" (click) = "logout()">Logout</button>
+          </div>
+      </div>
+  </div>
+  <div class="jumbotron mt-1">
+    <form [formGroup]="searchForm" (ngSubmit)="search()">
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="dep">From</label>
+          <input
+            type="text"
+            [class.is-invalid]="
+              searchForm.get('departureBusstop').invalid &&
+              searchForm.get('departureBusstop').touched
+            "
+            placeHolder="Departure Bus Stop"
+            id="dep"
+            class="form-control"
+            formControlName="departureBusstop"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              searchForm.get('departureBusstop').invalid &&
+              searchForm.get('departureBusstop').touched
+            "
+            >*Mandatory Field</small
+          >
+        </div>
+
+        <div class="form-group col-md-5">
+          <label for="ari">To</label>
+          <input
+            type="text"
+            [class.is-invalid]="
+              searchForm.get('arrivalBusstop').invalid &&
+              searchForm.get('arrivalBusstop').touched
+            "
+            placeHolder="Arrival Bus Stop"
+            id="ari"
+            class="form-control"
+            formControlName="arrivalBusstop"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              searchForm.get('arrivalBusstop').invalid &&
+              searchForm.get('arrivalBusstop').touched
+            "
+            >*Mandatory Field</small
+          >
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            class="form-control"
+            formControlName="date"
+          />
+
+          <div
+            *ngIf="
+              searchForm.get('date').invalid && searchForm.get('date').touched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="searchForm.get('date').errors?.dateError"
+              >*Date must be greater than current date</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <input
+          [disabled]="!searchForm.valid"
+          type="submit"
+          class="btn btn-primary"
+          value="Search"
+        />
+      </div>
+    </form>
+  </div>
+
+  <h2>{{ notFound }}</h2>
+
+  <div class="jumbotron" align="center" *ngIf="found">
+    <div class="row">
+      <div class="col-6"><h4>Bus Number:</h4></div>
+      <div class="col-6"><h4>{{ bus.busNumber }}</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6"><h4>From:</h4></div>
+      <div class="col-6"><h4>{{ bus.departureBusstop }}</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6"><h4>To:</h4></div>
+      <div class="col-6"><h4>{{ bus.arrivalBusstop }}</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6"><h4>Departure date:</h4></div>
+      <div class="col-6"><h4>{{ bus.departureDate }}</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6"><h4>Departure Time:</h4></div>
+      <div class="col-6"><h4>{{ bus.departureTime }}</h4></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-6"><h4>Arrival Date:</h4></div>
+      <div class="col-6"><h4>{{ bus.arrivalDate }}</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6"><h4>Arrival Time:</h4></div>
+      <div class="col-6"><h4>{{ bus.arrivalTime }}</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6"><h4>Cost:</h4></div>
+      <div class="col-6"><h4>{{ bus.cost | currency:'INR' }}</h4></div>
+    </div><br><br>
+
+    <button class="btn btn-primary" (click)="addPassengers()">Add Passengers</button>
+
+  </div>
+</div>
